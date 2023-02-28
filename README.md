@@ -1,4 +1,8 @@
-Welcome to the **Intro №1: Numpy**! Here you will find tutorials and code examples that will help you master the powerful array manipulation capabilities of the Numpy library.
+**Intro №1: Numpy**
+
+This is the first part of the tutorial series "Intro To Computer Vision". Here, you will find the main theory along with code examples that will help you master the basics of Numpy: Arrays, Mathematical Operations, Indexing, Other Ops.
+
+Let's get started!
 
 ```python
 import numpy as np
@@ -22,7 +26,7 @@ mult_list = list1 * 3
 print(mult_list) # Output: [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5]
 ```
 
-Numpy's arrays allows us to perform these operations much easier
+Numpy's arrays allow us to perform these operations much easier
 
 ```python
 # Arrays
@@ -41,8 +45,21 @@ print(mult_arr) # Output: [3, 6, 9, 12, 15]
 
 ## Creating Arrays
 
-Usually, the arrays come from your data. RGB images are such data: 3-channel arrays.
-For example, let us download a piece of data from the famous dataset MNIST.
+In Computer Vision we usually work with images. There are ways to create simple images using Numpy.
+
+```python
+# Creating zero array
+zero_arr = np.zeros((28,28)) # This will give us the numpy array of zero values with the shape (28,28)
+
+# Creating ones array
+ones_arr = np.ones((28,28)) # This will give us the numpy array of one values with the shape (28,28)
+
+# Creating noisy image
+noisy_arr = np.random.rand(64, 64, 3) # This will give us the numpy array of random values from 0 to 1
+```
+
+Sometimes the arrays come from your data. RGB images are such data: 3-channel arrays.
+For example, let us download a piece of data from the famous MNIST dataset.
 
 ```python
 from tensorflow.keras.datasets import mnist
@@ -51,53 +68,53 @@ from tensorflow.keras.datasets import mnist
 data_sample = x_train[0] # Take the first element of the data
 print(data_sample) # Outputs an array of 28x28
 
-[[  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0   0   3  18  18  18 126 136 175  26 166 255 247 127   0   0   0   0]
- [  0   0   0   0   0   0   0   0  30  36  94 154 170 253 253 253 253 253 225 172 253 242 195  64   0   0   0   0]
- [  0   0   0   0   0   0   0  49 238 253 253 253 253 253 253 253 253 251  93  82  82  56  39   0   0   0   0   0]
- [  0   0   0   0   0   0   0  18 219 253 253 253 253 253 198 182 247 241   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0  80 156 107 253 253 205  11   0  43 154   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0  14   1 154 253  90   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0 139 253 190   2   0   0   0   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0  11 190 253  70   0   0   0   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0   0  35 241 225 160 108   1   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0   0   0  81 240 253 253 119  25   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0   0   0   0  45 186 253 253 150  27   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0  16  93 252 253 187   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0 249 253 249  64   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0   0   0   0  46 130 183 253 253 207   2   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0   0  39 148 229 253 253 253 250 182   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0  24 114 221 253 253 253 253 201  78   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0  23  66 213 253 253 253 253 198  81   2   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0  18 171 219 253 253 253 253 195  80   9   0   0   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0  55 172 226 253 253 253 253 244 133  11   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0 136 253 253 253 212 135 132  16   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0]
- [  0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0]]
- 
-```
+[[  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   2,  13,  14,  34,  98, 119,  47, 116, 191, 163,  56,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   2,  29,  55, 118, 152, 227, 233, 236, 243, 230, 175, 238, 239, 167,  40,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,  62, 240, 253, 253, 253, 253, 248, 248, 251, 154,  78,  75,  50,  27,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,  28, 195, 224, 238, 253, 242, 150, 151, 206,  91,   0,   0,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   4,  59,  83, 150, 243, 165,   6,   6,  52,  37,   0,   0,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   0,   1,   4,  85, 226, 157,   1,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   0,   0,   0,  25, 165, 235,  48,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   0,   0,   0,   1,  36, 226, 206, 135,  58,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  68, 225, 249, 202,  75,  10,   0,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  43, 161, 230, 208,  94,   5,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   1,  21, 136, 252, 223,  42,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  31,  84, 167, 252, 231,  44,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  22, 104, 187, 226, 243, 252, 204,  16,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   0,   0,   9,  70, 180, 241, 251, 253, 233, 139,  34,   1,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   1,  16,  50, 138, 238, 253, 248, 234, 155,  44,   1,   0,   0,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   8,  36,  68, 195, 234, 253, 252, 230, 155,  56,   5,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,  52, 176, 234, 251, 228, 203, 171,  95,  12,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,  33,  93, 105, 104,  80,  56,  27,   2,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0],
+ [  0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0]]
+ ```
 
 
 
 ## Indexing
 
-Learn how to select specific elements from an array using indexing and slicing operations. We will cover how to access individual elements, rows, and columns, as well as how to use boolean indexing to select elements that match certain conditions.
+In case you need to select specific elements from an array to perform some operations on them - you will use indexing and slicing operations. 
+In Numpy you can access individual elements, rows, and columns, as well as using boolean indexing to select elements that match certain conditions.
+
+As common in Python, indexing starts from 0. To access an element, you should put two numbers in a square brackets. The first you accessing the rows, then the columns. You can also access only rows by one index and only columns by using [:, n], where *n* - the index of the column.
 
 ```python
-arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+arr = np.array([[1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9]])
 
-# Accessing an element
+# Accessing the second row and the third column
 print(arr[1, 2]) # Output: 6
 
-# Accessing a row
-print(arr[1]) # Output: [4, 5, 6]
+# Accessing the third row
+print(arr[2]) # Output: [7, 8, 9]
 
-# Accessing a column
+# Accessing the column
 print(arr[:, 1]) # Output: [2, 5, 8]
 
 # Boolean indexing
