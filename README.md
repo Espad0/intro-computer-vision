@@ -49,13 +49,13 @@ In Computer Vision we usually work with images. There are ways to create simple 
 
 ```python
 # Creating zero array
-zero_arr = np.zeros((28,28)) # This will give us the numpy array of zero values with the shape (28,28)
+zero_arr = np.zeros((28,28)) # the numpy array of zero values with the shape (28,28)
 
 # Creating ones array
-ones_arr = np.ones((28,28)) # This will give us the numpy array of one values with the shape (28,28)
+ones_arr = np.ones((28,28)) # the numpy array of one values with the shape (28,28)
 
 # Creating noisy image
-noisy_arr = np.random.rand(64, 64, 3) # This will give us the numpy array of random values from 0 to 1
+noisy_arr = np.random.rand(64, 64, 3) # the numpy array of random values from 0 to 1
 ```
 
 Sometimes the arrays come from your data. RGB images are such data: 3-channel arrays.
@@ -101,7 +101,7 @@ print(data_sample) # Outputs an array of 28x28
 In case you need to select specific elements from an array to perform some operations on them - you will use indexing and slicing operations. 
 In Numpy you can access individual elements, rows, and columns, as well as using boolean indexing to select elements that match certain conditions.
 
-As common in Python, indexing starts from 0. To access an element, you should put two numbers in a square brackets. The first you accessing the rows, then the columns. You can also access only rows by one index and only columns by using [:, n], where *n* - the index of the column.
+As common in Python, indexing starts from 0. To access an element in a 2D array, you should put two numbers in a square brackets. The first you accessing the rows, then the columns. You can also access only rows by one index and only columns by using [:, n], where *n* - the index of the column.
 
 ```python
 arr = np.array([[1, 2, 3],
@@ -124,37 +124,38 @@ print(arr[arr > 5]) # Output: [6, 7, 8, 9]
 
 ## Slicing
 
-Discover how to extract sections of an array using slicing operations. We will cover how to slice arrays along different axes and how to use the step parameter to select every n-th element.
+Similarly to Indexing, we can extract sections of an array using slicing operations. Specifying the start index and the end index of a row or a column, we will select everything between them. Using the ":" index we will select the whole column or row.
 
 ```python
-arr = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+arr = np.array([[1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9]])
+                
+# Slicing the last two columns
+print(arr[:,1:3]
+# Output:
+# [[2 3]
+#  [5 6]
+#  [8 9]]
 
 # Slicing a section of the array
 print(arr[1:3, 1:3])
 # Output:
 # [[5 6]
 #  [8 9]]
-
-# Slicing with step parameter
-print(arr[::2, ::2])
-# Output:
-# [[1 3]
-#  [7 9]]
 ```
 
 
-## Arrays
+## Shapes and Dimensions
 
-Learn how to create arrays, understand the difference between 1D, 2D and 3D arrays, learn how to inspect the shape and size of an array, understand the difference between reshaping and resizing arrays, and learn how to concatenate and split arrays
+The shape of a NumPy array is a tuple of integers that gives the size of the array along each dimension. For example, a 2-dimensional array with 3 rows and 4 columns would have a shape of (3, 4). A 1-dimensional array with 5 elements would have a shape of (5,). You can get the shape of a NumPy array using the shape attribute.
 
 ```python
-# Creating an array
 arr = np.array([1, 2, 3, 4, 5])
 print(arr) # Output: [1 2 3 4 5]
 
-# Understanding the shape and size of an array
+# Understanding the shape
 print(arr.shape) # Output: (5,)
-print(arr.size) # Output: 5
 
 # Reshaping an array
 arr = arr.reshape(5, 1)
@@ -165,17 +166,75 @@ print(arr)
 #  [3]
 #  [4]
 #  [5]]
-
-# Concatenating arrays
-arr1 = np.array([1, 2, 3])
-arr2 = np.array([4, 5, 6])
-arr3 = np.concatenate([arr1, arr2])
-print(arr3) # Output: [1 2 3 4 5 6]
 ```
 
-### Requirements
+## Operations on Arrays
 
-This repository requires Numpy library to be installed, the examples and tutorials are written in Python. Make sure you have the latest version of Numpy before running the examples.
+Something Something
+
+```python
+arr = np.array([[1, 2, 3],
+                [4, 5, 6],
+                [7, 8, 9]])
+                
+# The sum of all elements in the array
+sum_value = arr.sum() # or np.sum(arr)
+print(sum_value) # Output: 45
+
+# The sum of the column elements
+sum_values = arr.sum(axis=0) # or np.sum(arr, axis=0)
+print(sum_values) # Output: [12 15 18]
+
+# The sum of the row elements
+sum_values = arr.sum(axis=1) # or np.sum(arr, axis=1)
+print(sum_values) # Output: [6 15 24]
+
+# Multiplication of arrays
+A = np.array([1, 2, 3])
+B = np.array([4, 5, 6])
+C = A * B
+print(C) # Output: [4 10 18]
+
+# Division of arrays
+A = np.array([1, 2, 3])
+B = np.array([4, 5, 6])
+C = A / B
+print(C) # Output: [0.25 0.4 0.5]
+```
+
+Something Something: Three important functinos: np.rot90, np.concatenate, np.where
+
+np.rot90 - When we have an image as an array, we can rotate the whole image by 90 degrees
+
+We use it with two arguments. The array to rotate and the number of times to rotate the array by 90 degrees.
+
+a = np.array([[1, 2, 3],
+              [4, 5, 6],
+              [7, 8, 9]])
+
+
+b = np.rot90(a)
+print(b) # Output: [[3 6 9]
+                    [2 5 8]
+                    [1 4 7]]
+
+
+np.concatenate - When we have several images what we want to concatenate together in order to get a new image, consisting of them together
+
+We will use a simple example of two small arrays
+
+```python
+a = np.array([[0,0,0],
+              [0,0,0]])
+b = np.array([[1,1,1],
+              [1,1,1]])
+c = np.concatenate([a,b], axis=0)
+print(c) # Output: [[0 0 0]
+                   [0 0 0]
+                   [1 1 1]
+                   [1 1 1]]
+```
+
 
 ### Contributing
 
