@@ -170,7 +170,8 @@ print(arr)
 
 ## Operations on Arrays
 
-Something Something
+The last part of this tutorial is about the most common opertions with arrays related to computer vision tasks.
+
 
 ```python
 arr = np.array([[1, 2, 3],
@@ -202,12 +203,12 @@ C = A / B
 print(C) # Output: [0.25 0.4 0.5]
 ```
 
-Something Something: Three important functinos: np.rot90, np.concatenate, np.where
+Related to Computer Vision we have three important functins: np.rot90, np.concatenate, np.where
 
-np.rot90 - When we have an image as an array, we can rotate the whole image by 90 degrees
 
-We use it with two arguments. The array to rotate and the number of times to rotate the array by 90 degrees.
+*np.rot90(arr, n)* - rotate an image by 90 degrees. The array *arr* to rotate and the number of times *n* to rotate the array by 90 degrees.
 
+```python
 a = np.array([[1, 2, 3],
               [4, 5, 6],
               [7, 8, 9]])
@@ -215,27 +216,43 @@ a = np.array([[1, 2, 3],
 
 b = np.rot90(a)
 print(b) # Output: [[3 6 9]
-                    [2 5 8]
-                    [1 4 7]]
+#                   [2 5 8]
+#                   [1 4 7]]
+```
 
 
-np.concatenate - When we have several images what we want to concatenate together in order to get a new image, consisting of them together
-
-We will use a simple example of two small arrays
+*np.concatenate* - concatenate several images together in order to get a new image, consisting of them together.
 
 ```python
 a = np.array([[0,0,0],
               [0,0,0]])
+              
 b = np.array([[1,1,1],
               [1,1,1]])
+              
 c = np.concatenate([a,b], axis=0)
+
 print(c) # Output: [[0 0 0]
-                   [0 0 0]
-                   [1 1 1]
-                   [1 1 1]]
+#                   [0 0 0]
+#                   [1 1 1]
+#                   [1 1 1]]
 ```
 
 
+*np.where(arr, x, y)* - create a new array, based on condition. If the condition is true - place *x*, otherwise - *y*.
+
+```python
+arr = np.array([[1, -2, 3],
+                [4, 5, -6],
+                [-7, 8, 9]])
+                
+positive_arr = np.where(arr > 0, arr, 0)
+
+print(positive_arr) # Output: [[1 0 3]
+#                             [4 5 0]
+#                             [0 8 9]]
+```
+
 ### Contributing
 
-We welcome contributions to this repository. If you have suggestions for new examples or tutorials, or if you have found a bug, please open
+We welcome contributions to this repository. If you have any suggestions, or if you have found a bug, feel free to create a pull request.
